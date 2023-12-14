@@ -17,9 +17,9 @@
  * limitations under the License.
  * #L%
  */
-package com.flowingcode.vaadin.addons.template.test;
+package com.flowingcode.vaadin.addons.dayofweekselector.test;
 
-import com.flowingcode.vaadin.addons.template.TemplateAddon;
+import com.flowingcode.vaadin.addons.dayofweekselector.DaysOfWeekSelector;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class SerializationTest {
   @Test
   public void testSerialization() throws ClassNotFoundException, IOException {
     try {
-      testSerializationOf(new TemplateAddon());
+      testSerializationOf(new DaysOfWeekSelector());
     } catch (Exception e) {
       Assert.fail("Problem while testing serialization: " + e.getMessage());
     }
