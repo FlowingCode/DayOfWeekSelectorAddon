@@ -17,20 +17,22 @@
  * limitations under the License.
  * #L%
  */
+package com.flowingcode.vaadin.addons.dayofweekselector;
 
-package com.flowingcode.vaadin.addons.template;
-
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
+import com.flowingcode.vaadin.addons.DemoLayout;
+import com.flowingcode.vaadin.addons.GithubLink;
+import com.flowingcode.vaadin.addons.demo.TabbedDemo;
+import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
-@Route("")
-public class DemoView extends VerticalLayout implements BeforeEnterObserver {
+@ParentLayout(DemoLayout.class)
+@Route("template")
+@GithubLink("https://github.com/FlowingCode/AddonStarter24")
+public class DaysOfWeekSelectorDemoView extends TabbedDemo {
 
-  @Override
-  public void beforeEnter(BeforeEnterEvent event) {
-    event.forwardTo(TemplateDemoView.class);
+  public DaysOfWeekSelectorDemoView() {
+    addDemo(DaysOfWeekSelectorDemo.class);
+    setSizeFull();
   }
 }

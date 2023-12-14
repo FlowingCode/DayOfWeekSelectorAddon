@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.flowingcode.vaadin.addons</groupId>
-    <artifactId>template-addon</artifactId>
+    <artifactId>day-of-week-selector-addon</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>Template Add-on</name>
-    <description>Template Add-on for Vaadin Flow</description>
+    <description>Day of Week Selector Add-on for Vaadin Flow</description>
     <url>https://www.flowingcode.com/en/open-source/</url>
 
     <properties>
-        <vaadin.version>24.1.2</vaadin.version>
+        <vaadin.version>24.3.0</vaadin.version>
         <selenium.version>4.10.0</selenium.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
