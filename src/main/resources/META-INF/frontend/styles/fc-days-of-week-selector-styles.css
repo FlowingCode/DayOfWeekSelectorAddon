@@ -1,0 +1,12 @@
+vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled]::part(label) {
+    opacity: 1;
+}
+
+vaadin-custom-field[readonly] vaadin-button.fc-days-of-week-selector-button[disabled] {
+    color: var(--lumo-secondary-text-color);
+    background: transparent;
+}
+
+vaadin-custom-field[readonly] vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled] {
+    border: var(--vaadin-input-field-readonly-border, 1px dashed var(--lumo-contrast-30pct));
+}
