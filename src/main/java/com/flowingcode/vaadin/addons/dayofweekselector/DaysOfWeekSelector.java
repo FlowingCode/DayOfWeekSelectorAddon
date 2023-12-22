@@ -78,6 +78,23 @@ public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     clear();
   }
 
+  public DaysOfWeekSelector(DayOfWeek... value) {
+    this();
+    if (value.length > 0) {
+      setValue(value[0], value);
+    }
+  }
+
+  public DaysOfWeekSelector(String label) {
+    this();
+    setLabel(label);
+  }
+
+  public DaysOfWeekSelector(String label, DayOfWeek... value) {
+    this(value);
+    setLabel(label);
+  }
+
   @Override
   public Set<DayOfWeek> getEmptyValue() {
     return EnumSet.noneOf(DayOfWeek.class);
@@ -111,6 +128,10 @@ public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     getElement().setProperty("readonly", readOnly);
     getElement().setAttribute("readonly", readOnly);
     getButtons().forEach(button -> button.setEnabled(!readOnly));
+  }
+
+  public void setValue(DayOfWeek first, DayOfWeek... rest) {
+    setValue(EnumSet.of(first, rest));
   }
 
 }
