@@ -3,6 +3,7 @@ package com.flowingcode.vaadin.addons.dayofweekselector;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.customfield.CustomField;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import java.time.DayOfWeek;
 import java.util.EnumSet;
@@ -12,11 +13,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SuppressWarnings("serial")
+@CssImport("./styles/fc-days-of-week-selector-styles.css")
 public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
 
   private static final String BUTTON_SIZE = "40px";
 
   private static class DayOfWeekButton extends Button {
+    private static final String CLASS_NAME = "fc-days-of-week-selector-button";
+
     private final DayOfWeek dayOfWeek;
     private boolean state;
 
@@ -24,6 +28,7 @@ public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
       super(text);
       this.dayOfWeek = dayOfWeek;
 
+      setClassName(CLASS_NAME);
       addThemeVariants(ButtonVariant.LUMO_ICON);
       setWidth(BUTTON_SIZE);
       setMaxWidth(BUTTON_SIZE);
@@ -99,6 +104,13 @@ public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
   protected void setPresentationValue(Set<DayOfWeek> newPresentationValue) {
     getButtons()
         .forEach(button -> button.setState(newPresentationValue.contains(button.getDayOfWeek())));
+  }
+
+  @Override
+  public void setReadOnly(boolean readOnly) {
+    getElement().setProperty("readonly", readOnly);
+    getElement().setAttribute("readonly", readOnly);
+    getButtons().forEach(button -> button.setEnabled(!readOnly));
   }
 
 }
