@@ -1,3 +1,13 @@
+
+vaadin-button.fc-days-of-week-selector-button {
+    --lumo-button-size: 40px;
+    border-radius: 50%;
+    width: var(--lumo-button-size);
+    max-width: var(--lumo-button-size);
+    height: var(--lumo-button-size);
+    max-height: var(--lumo-button-size);
+}
+
 vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled]::part(label) {
     opacity: 1;
 }

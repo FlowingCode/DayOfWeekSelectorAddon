@@ -16,8 +16,6 @@ import java.util.stream.Stream;
 @CssImport("./styles/fc-days-of-week-selector-styles.css")
 public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
 
-  private static final String BUTTON_SIZE = "40px";
-
   private static class DayOfWeekButton extends Button {
     private static final String CLASS_NAME = "fc-days-of-week-selector-button";
 
@@ -30,12 +28,6 @@ public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
 
       setClassName(CLASS_NAME);
       addThemeVariants(ButtonVariant.LUMO_ICON);
-      setWidth(BUTTON_SIZE);
-      setMaxWidth(BUTTON_SIZE);
-      setHeight(BUTTON_SIZE);
-      setMaxHeight(BUTTON_SIZE);
-      getStyle().set("--lumo-button-size", BUTTON_SIZE);
-      getStyle().set("border-radius", "50%");
 
       addClickListener(e -> toggleState());
     }
