@@ -27,7 +27,7 @@ import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
 @ParentLayout(DemoLayout.class)
-@Route("template")
+@Route("days-of-week-selector")
 @GithubLink("https://github.com/FlowingCode/AddonStarter24")
 public class DaysOfWeekSelectorDemoView extends TabbedDemo {
 
