@@ -9,7 +9,7 @@ import java.time.DayOfWeek;
 @DemoSource
 @PageTitle("Demo")
 @SuppressWarnings("serial")
-@Route(value = "day-of-week-selector", layout = DaysOfWeekSelectorDemoView.class)
+@Route(value = "day-of-week-selector/demo", layout = DaysOfWeekSelectorDemoView.class)
 public class DaysOfWeekSelectorDemo extends Div {
 
   public DaysOfWeekSelectorDemo() {
