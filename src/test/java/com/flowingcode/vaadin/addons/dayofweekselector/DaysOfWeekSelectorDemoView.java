@@ -33,6 +33,7 @@ public class DaysOfWeekSelectorDemoView extends TabbedDemo {
 
   public DaysOfWeekSelectorDemoView() {
     addDemo(DaysOfWeekSelectorDemo.class);
+    addDemo(DaysOfWeekSelectorBinderDemo.class);
     setSizeFull();
   }
 }
