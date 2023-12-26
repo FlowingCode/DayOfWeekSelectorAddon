@@ -39,9 +39,9 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/FlowingCode/AddonStarter24</url>
-        <connection>scm:git:git://github.com/FlowingCode/AddonStarter24.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:/FlowingCode/AddonStarter24.git</developerConnection>
+        <url>https://github.com/FlowingCode/DayOfWeekSelectorAddon</url>
+        <connection>scm:git:git://github.com/FlowingCode/DayOfWeekSelectorAddon.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:/FlowingCode/DayOfWeekSelectorAddon.git</developerConnection>
         <tag>master</tag>
     </scm>
 
