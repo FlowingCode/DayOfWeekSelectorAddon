@@ -3,10 +3,14 @@ package com.flowingcode.vaadin.addons.dayofweekselector;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.customfield.CustomField;
+import com.vaadin.flow.component.datepicker.DatePicker.DatePickerI18n;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import java.time.DayOfWeek;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -121,6 +125,37 @@ public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
 
   public void setValue(DayOfWeek first, DayOfWeek... rest) {
     setValue(EnumSet.of(first, rest));
+  }
+
+  public void setI18N(DatePickerI18n i18n) {
+    setWeekDaysShort(i18n.getWeekdaysShort());
+    if (i18n.getFirstDayOfWeek() == 0) {
+      setFirstDayOfWeek(DayOfWeek.SUNDAY);
+    } else {
+      setFirstDayOfWeek(DayOfWeek.of(i18n.getFirstDayOfWeek()));
+    }
+  }
+
+  public void setWeekDaysShort(List<String> weekdaysShort) {
+    Objects.requireNonNull(weekdaysShort);
+
+    for (DayOfWeek day : DayOfWeek.values()) {
+      int index = day.getValue() % 7;
+      String text = weekdaysShort.get(index);
+      getButtons().filter(button -> button.getDayOfWeek() == day)
+          .forEach(button -> button.setText(text));
+    }
+  }
+
+  public void setFirstDayOfWeek(DayOfWeek first) {
+    DayOfWeekButton[] buttons = getButtons().toArray(DayOfWeekButton[]::new);
+    if (buttons[0].dayOfWeek != first) {
+      Arrays.sort(buttons, Comparator.comparing(DayOfWeekButton::getDayOfWeek));
+      buttonsLayout.removeAll();
+      for (int i = 0; i < 7; i++) {
+        buttonsLayout.add(buttons[(i + first.getValue() - 1) % 7]);
+      }
+    }
   }
 
 }
