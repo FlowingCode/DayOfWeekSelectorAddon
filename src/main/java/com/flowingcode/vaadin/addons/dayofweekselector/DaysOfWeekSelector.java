@@ -25,10 +25,7 @@ public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     public DayOfWeekButton(DayOfWeek dayOfWeek, String text) {
       super(text);
       this.dayOfWeek = dayOfWeek;
-
       setClassName(CLASS_NAME);
-      addThemeVariants(ButtonVariant.LUMO_ICON);
-
       addClickListener(e -> toggleState());
     }
 

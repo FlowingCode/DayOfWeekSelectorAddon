@@ -4,8 +4,12 @@ vaadin-button.fc-days-of-week-selector-button {
     border-radius: 50%;
     width: var(--lumo-button-size);
     max-width: var(--lumo-button-size);
+    min-width: var(--lumo-button-size);
     height: var(--lumo-button-size);
     max-height: var(--lumo-button-size);
+    min-height: var(--lumo-button-size);
+    padding-left: calc(var(--lumo-button-size) / 4);
+    padding-right: calc(var(--lumo-button-size) / 4);
 }
 
 vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled]::part(label) {
