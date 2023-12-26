@@ -1,23 +1,25 @@
-[![Published on Vaadin Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/template-addon)
-[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/template-addon.svg)](https://vaadin.com/directory/component/template-addon)
-[![Build Status](https://jenkins.flowingcode.com/job/template-addon/badge/icon)](https://jenkins.flowingcode.com/job/template-addon)
-[![Maven Central](https://img.shields.io/maven-central/v/com.flowingcode.vaadin.addons/template-addon)](https://mvnrepository.com/artifact/com.flowingcode.vaadin.addons/template-addon)
+[![Published on Vaadin Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/day-of-week-selector-addon)
+[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/day-of-week-selector-addon.svg)](https://vaadin.com/directory/component/day-of-week-selector-addon)
+[![Build Status](https://jenkins.flowingcode.com/job/DayOfWeekSelector-addon/badge/icon)](https://jenkins.flowingcode.com/job/DayOfWeekSelector-addon)
+[![Maven Central](https://img.shields.io/maven-central/v/com.flowingcode.vaadin.addons/day-of-week-selector-addon)](https://mvnrepository.com/artifact/com.flowingcode.vaadin.addons/day-of-week-selector-addon)
 
-# Template Add-on
+# Day of Week Selector Add-on
 
-This is a template project for building new Vaadin 24 add-ons
+Display the days of the week so that they can be selected.
 
 ## Features
 
-* List the features of your add-on in here
+* Works with Binder
+* Support read-only and disabled states.
+* Support I18N
 
 ## Online demo
 
-[Online demo here](http://addonsv24.flowingcode.com/template)
+[Online demo here](http://addonsv24.flowingcode.com/day-of-week-selector)
 
 ## Download release
 
-[Available in Vaadin Directory](https://vaadin.com/directory/component/template-addon)
+[Available in Vaadin Directory](https://vaadin.com/directory/component/day-of-week-selector-addon)
 
 ### Maven install
 
@@ -26,17 +28,9 @@ Add the following dependencies in your pom.xml file:
 ```xml
 <dependency>
    <groupId>com.flowingcode.vaadin.addons</groupId>
-   <artifactId>template-addon</artifactId>
+   <artifactId>day-of-week-selector-addon</artifactId>
    <version>X.Y.Z</version>
 </dependency>
-```
-<!-- the above dependency should be updated with latest released version information -->
-
-```xml
-<repository>
-   <id>vaadin-addons</id>
-   <url>https://maven.vaadin.com/vaadin-addons</url>
-</repository>
 ```
 
 For SNAPSHOT versions see [here](https://maven.flowingcode.com/snapshots/).
@@ -50,7 +44,7 @@ To see the demo, navigate to http://localhost:8080/
 
 ## Release notes
 
-See [here](https://github.com/FlowingCode/TemplateAddon/releases)
+See [here](https://github.com/FlowingCode/DayOfWeekSelectorAddon/releases)
 
 ## Issue tracking
 
@@ -75,7 +69,7 @@ Then, follow these steps for creating a contribution:
 
 This add-on is distributed under Apache License 2.0. For license terms, see LICENSE.txt.
 
-TEMPLATE_ADDON is written by Flowing Code S.A.
+Day of Week Selector Add-on is written by Flowing Code S.A.
 
 # Developer Guide
 
