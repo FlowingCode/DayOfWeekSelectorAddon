@@ -27,14 +27,14 @@ import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
 @ParentLayout(DemoLayout.class)
-@Route("days-of-week-selector")
+@Route("day-of-week-selector")
 @GithubLink("https://github.com/FlowingCode/AddonStarter24")
-public class DaysOfWeekSelectorDemoView extends TabbedDemo {
+public class DayOfWeekSelectorDemoView extends TabbedDemo {
 
-  public DaysOfWeekSelectorDemoView() {
-    addDemo(DaysOfWeekSelectorDemo.class);
-    addDemo(DaysOfWeekSelectorBinderDemo.class);
-    addDemo(DaysOfWeekSelectorI18NDemo.class);
+  public DayOfWeekSelectorDemoView() {
+    addDemo(DayOfWeekSelectorDemo.class);
+    addDemo(DayOfWeekSelectorBinderDemo.class);
+    addDemo(DayOfWeekSelectorI18NDemo.class);
     setSizeFull();
   }
 }

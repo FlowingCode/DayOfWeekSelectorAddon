@@ -10,11 +10,11 @@ import java.util.List;
 @DemoSource
 @PageTitle("I18N")
 @SuppressWarnings("serial")
-@Route(value = "day-of-week-selector/i18n", layout = DaysOfWeekSelectorDemoView.class)
-public class DaysOfWeekSelectorI18NDemo extends Div {
+@Route(value = "day-of-week-selector/i18n", layout = DayOfWeekSelectorDemoView.class)
+public class DayOfWeekSelectorI18NDemo extends Div {
 
-  public DaysOfWeekSelectorI18NDemo() {
-    DaysOfWeekSelector selector = new DaysOfWeekSelector();
+  public DayOfWeekSelectorI18NDemo() {
+    DayOfWeekSelector selector = new DayOfWeekSelector();
     selector.setWeekDaysShort(List.of("D", "L", "M", "X", "J", "V", "S"));
     selector.setFirstDayOfWeek(DayOfWeek.MONDAY);
     add(selector);
