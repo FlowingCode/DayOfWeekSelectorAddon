@@ -14,15 +14,15 @@ import java.util.stream.Collectors;
 @DemoSource
 @PageTitle("Binder")
 @SuppressWarnings("serial")
-@Route(value = "day-of-week-selector/binder", layout = DaysOfWeekSelectorDemoView.class)
-public class DaysOfWeekSelectorBinderDemo extends Div {
+@Route(value = "day-of-week-selector/binder", layout = DayOfWeekSelectorDemoView.class)
+public class DayOfWeekSelectorBinderDemo extends Div {
 
-  public DaysOfWeekSelectorBinderDemo() {
+  public DayOfWeekSelectorBinderDemo() {
 
     // begin-block selector1
     Span span1 = new Span();
     Binder<Bean> binder1 = new Binder<>();
-    DaysOfWeekSelector selector1 = new DaysOfWeekSelector("Bound field");
+    DayOfWeekSelector selector1 = new DayOfWeekSelector("Bound field");
     binder1.forField(selector1).bind(Bean::getDays, Bean::setDays);
     add(selector1, span1);
 
@@ -36,7 +36,7 @@ public class DaysOfWeekSelectorBinderDemo extends Div {
     // begin-block selector2
     Span span2 = new Span();
     Binder<Bean> binder2 = new Binder<>();
-    DaysOfWeekSelector selector2 = new DaysOfWeekSelector("Bound field, required");
+    DayOfWeekSelector selector2 = new DayOfWeekSelector("Bound field, required");
     binder2.forField(selector2).asRequired().bind(Bean::getDays, Bean::setDays);
     add(selector2, span2);
 

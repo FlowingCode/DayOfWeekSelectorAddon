@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 @SuppressWarnings("serial")
 @CssImport("./styles/fc-days-of-week-selector-styles.css")
-public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
+public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
 
   private static class DayOfWeekButton extends Button {
     private static final String CLASS_NAME = "fc-days-of-week-selector-button";
@@ -54,7 +54,7 @@ public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
 
   private HorizontalLayout buttonsLayout;
 
-  public DaysOfWeekSelector() {
+  public DayOfWeekSelector() {
     getStyle().set("padding", "var(--lumo-space-m)");
 
     buttonsLayout = new HorizontalLayout();
@@ -71,19 +71,19 @@ public class DaysOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     clear();
   }
 
-  public DaysOfWeekSelector(DayOfWeek... value) {
+  public DayOfWeekSelector(DayOfWeek... value) {
     this();
     if (value.length > 0) {
       setValue(value[0], value);
     }
   }
 
-  public DaysOfWeekSelector(String label) {
+  public DayOfWeekSelector(String label) {
     this();
     setLabel(label);
   }
 
-  public DaysOfWeekSelector(String label, DayOfWeek... value) {
+  public DayOfWeekSelector(String label, DayOfWeek... value) {
     this(value);
     setLabel(label);
   }

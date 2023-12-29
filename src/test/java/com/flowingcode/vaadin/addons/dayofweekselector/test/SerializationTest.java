@@ -19,7 +19,7 @@
  */
 package com.flowingcode.vaadin.addons.dayofweekselector.test;
 
-import com.flowingcode.vaadin.addons.dayofweekselector.DaysOfWeekSelector;
+import com.flowingcode.vaadin.addons.dayofweekselector.DayOfWeekSelector;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class SerializationTest {
   @Test
   public void testSerialization() throws ClassNotFoundException, IOException {
     try {
-      testSerializationOf(new DaysOfWeekSelector());
+      testSerializationOf(new DayOfWeekSelector());
     } catch (Exception e) {
       Assert.fail("Problem while testing serialization: " + e.getMessage());
     }
