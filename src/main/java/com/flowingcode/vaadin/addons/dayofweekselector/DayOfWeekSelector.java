@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,6 +35,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Shows the days of the week so they can be selected.
+ */
 @SuppressWarnings("serial")
 @CssImport("./styles/fc-days-of-week-selector-styles.css")
 public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
@@ -73,6 +76,9 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
 
   private HorizontalLayout buttonsLayout;
 
+  /**
+   * Creates a new instance of {@code DayOfWeekSelector}.
+   */
   public DayOfWeekSelector() {
     getStyle().set("padding", "var(--lumo-space-m)");
 
@@ -90,6 +96,11 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     clear();
   }
 
+  /**
+   * Constructs a new instance of {@code DayOfWeekSelector} with the given value.
+   *
+   * @param value the initial value.
+   */
   public DayOfWeekSelector(DayOfWeek... value) {
     this();
     if (value.length > 0) {
@@ -97,11 +108,22 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     }
   }
 
+  /**
+   * Constructs a new instance of {@code DayOfWeekSelector} with the given label.
+   *
+   * @param label the text to set as the label
+   */
   public DayOfWeekSelector(String label) {
     this();
     setLabel(label);
   }
 
+  /**
+   * Constructs a new instance of {@code DayOfWeekSelector} with the given label and initial value.
+   *
+   * @param label the text to set as the label
+   * @param value the initial value.
+   */
   public DayOfWeekSelector(String label, DayOfWeek... value) {
     this(value);
     setLabel(label);
@@ -142,10 +164,16 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     getButtons().forEach(button -> button.setEnabled(!readOnly));
   }
 
+  /** Sets the value of this object. */
   public void setValue(DayOfWeek first, DayOfWeek... rest) {
     setValue(EnumSet.of(first, rest));
   }
 
+  /**
+   * Sets the internationalization properties for this component.
+   *
+   * @param i18n the internationalized properties, not <code>null</code>
+   */
   public void setI18N(DatePickerI18n i18n) {
     setWeekDaysShort(i18n.getWeekdaysShort());
     if (i18n.getFirstDayOfWeek() == 0) {
@@ -155,6 +183,12 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     }
   }
 
+  /**
+   * Sets the short names of the week days, starting from {@code sun} and ending on {@code sat}.
+   *
+   * @param weekdaysShort the short names of the week days
+   * @return this instance for method chaining
+   */
   public void setWeekDaysShort(List<String> weekdaysShort) {
     Objects.requireNonNull(weekdaysShort);
 
@@ -166,6 +200,16 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     }
   }
 
+  /**
+   * Sets the first day of the week.
+   * <p>
+   * 0 for Sunday, 1 for Monday, 2 for Tuesday, 3 for Wednesday, 4 for Thursday, 5 for Friday, 6 for
+   * Saturday.
+   *
+   * @param firstDayOfWeek the index of the first day of the week
+   * @return this instance for method chaining
+   * @throws IllegalArgumentException if firstDayOfWeek is invalid
+   */
   public void setFirstDayOfWeek(DayOfWeek first) {
     DayOfWeekButton[] buttons = getButtons().toArray(DayOfWeekButton[]::new);
     if (buttons[0].dayOfWeek != first) {
