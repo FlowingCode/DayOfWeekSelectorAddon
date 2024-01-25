@@ -81,6 +81,7 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
    */
   public DayOfWeekSelector() {
     getStyle().set("padding", "var(--lumo-space-m)");
+    this.setWidthFull();
 
     buttonsLayout = new HorizontalLayout();
     buttonsLayout.add(new DayOfWeekButton(DayOfWeek.SUNDAY, "S"));
@@ -90,6 +91,8 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     buttonsLayout.add(new DayOfWeekButton(DayOfWeek.THURSDAY, "T"));
     buttonsLayout.add(new DayOfWeekButton(DayOfWeek.FRIDAY, "F"));
     buttonsLayout.add(new DayOfWeekButton(DayOfWeek.SATURDAY, "S"));
+
+    buttonsLayout.setClassName("fc-days-of-week-selector-buttons-layout");
 
     getButtons().forEach(button -> button.addClickListener(ev -> updateValue()));
     add(buttonsLayout);
