@@ -4,7 +4,7 @@
 
     <groupId>com.flowingcode.vaadin.addons</groupId>
     <artifactId>day-of-week-selector-addon</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>Day of Week Selector Add-on</name>
     <description>Day of Week Selector Add-on for Vaadin Flow</description>
     <url>https://www.flowingcode.com/en/open-source/</url>
@@ -40,7 +40,7 @@
         <url>https://github.com/FlowingCode/DayOfWeekSelectorAddon</url>
         <connection>scm:git:git://github.com/FlowingCode/DayOfWeekSelectorAddon.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:/FlowingCode/DayOfWeekSelectorAddon.git</developerConnection>
-        <tag>master</tag>
+        <tag>1.0.1</tag>
     </scm>
 
     <distributionManagement>
