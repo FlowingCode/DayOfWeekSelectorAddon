@@ -190,7 +190,6 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
    * Sets the short names of the week days, starting from {@code sun} and ending on {@code sat}.
    *
    * @param weekdaysShort the short names of the week days
-   * @return this instance for method chaining
    */
   public void setWeekDaysShort(List<String> weekdaysShort) {
     Objects.requireNonNull(weekdaysShort);
@@ -209,8 +208,7 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
    * 0 for Sunday, 1 for Monday, 2 for Tuesday, 3 for Wednesday, 4 for Thursday, 5 for Friday, 6 for
    * Saturday.
    *
-   * @param firstDayOfWeek the index of the first day of the week
-   * @return this instance for method chaining
+   * @param first the index of the first day of the week
    * @throws IllegalArgumentException if firstDayOfWeek is invalid
    */
   public void setFirstDayOfWeek(DayOfWeek first) {
