@@ -178,7 +178,12 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
    * @param i18n the internationalized properties, not <code>null</code>
    */
   public void setI18N(DatePickerI18n i18n) {
-    setWeekDaysShort(i18n.getWeekdaysShort());
+    if (i18n.getWeekdaysShort() != null) {
+      setWeekDaysShort(i18n.getWeekdaysShort());
+    }
+    if (i18n.getWeekdays() != null) {
+      setWeekDaysTooltip(i18n.getWeekdays());
+    }
     if (i18n.getFirstDayOfWeek() == 0) {
       setFirstDayOfWeek(DayOfWeek.SUNDAY);
     } else {
@@ -199,6 +204,22 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
       String text = weekdaysShort.get(index);
       getButtons().filter(button -> button.getDayOfWeek() == day)
           .forEach(button -> button.setText(text));
+    }
+  }
+
+  /**
+   * Sets the tooltips of the week days, starting from {@code sun} and ending on {@code sat}.
+   * 
+   * @param weekdaysTooltip the tooltips of the week days
+   */
+  public void setWeekDaysTooltip(List<String> weekdaysTooltip) {
+    Objects.requireNonNull(weekdaysTooltip);
+
+    for (DayOfWeek day : DayOfWeek.values()) {
+      int index = day.getValue() % 7;
+      String text = weekdaysTooltip.get(index);
+      getButtons().filter(button -> button.getDayOfWeek() == day)
+          .forEach(button -> button.setTooltipText(text));
     }
   }
 

@@ -20,11 +20,14 @@
 package com.flowingcode.vaadin.addons.dayofweekselector;
 
 import com.flowingcode.vaadin.addons.demo.DemoSource;
+import com.vaadin.flow.component.datepicker.DatePicker.DatePickerI18n;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import java.time.DayOfWeek;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.stream.Stream;
 
 @DemoSource
 @PageTitle("I18N")
@@ -34,6 +37,21 @@ public class DayOfWeekSelectorI18NDemo extends Div {
 
   public DayOfWeekSelectorI18NDemo() {
     DayOfWeekSelector selector = new DayOfWeekSelector();
+    selector.setLabel("I18N with DatePickerI18n");
+
+    DatePickerI18n i18n = new DatePickerI18n();
+    i18n.setWeekdaysShort(Stream.of(DayOfWeek.values())
+        .map(d -> d.getDisplayName(TextStyle.NARROW_STANDALONE, getLocale())).toList());
+    i18n.setWeekdays(Stream.of(DayOfWeek.values())
+        .map(d -> d.getDisplayName(TextStyle.FULL_STANDALONE, getLocale())).toList());
+    i18n.setFirstDayOfWeek(DayOfWeek.MONDAY.getValue() - 1);
+    selector.setI18N(i18n);
+    add(selector);
+
+    selector = new DayOfWeekSelector();
+    selector.setLabel("I18N without DatePickerI18n");
+    selector.setWeekDaysTooltip(
+        List.of("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"));
     selector.setWeekDaysShort(List.of("D", "L", "M", "X", "J", "V", "S"));
     selector.setFirstDayOfWeek(DayOfWeek.MONDAY);
     add(selector);
