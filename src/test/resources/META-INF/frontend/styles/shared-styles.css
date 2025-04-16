@@ -18,3 +18,13 @@
  * #L%
  */
 /*Demo styles*/
+html {
+}
+
+.demo {
+    gap: var(--lumo-space-m);
+}
+
+fc-days-of-week-selector::part(label) {
+    font-weight: bold;
+}

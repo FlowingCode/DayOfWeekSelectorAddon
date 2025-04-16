@@ -19,13 +19,19 @@
  */
 package com.flowingcode.vaadin.addons.dayofweekselector;
 
+import com.vaadin.flow.component.ClientCallable;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.customfield.CustomField;
 import com.vaadin.flow.component.datepicker.DatePicker.DatePickerI18n;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.dom.Element;
+
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.EnumSet;
@@ -33,14 +39,22 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Shows the days of the week so they can be selected.
  */
 @SuppressWarnings("serial")
 @CssImport("./styles/fc-days-of-week-selector-styles.css")
+@JsModule("./src/fc-days-of-week-selector.ts")
+@Tag("fc-days-of-week-selector")
 public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
+
+  public static final class CssProperties {
+    public static final String OVERFLOW_ICON_SIZE = "--fc-days-of-week-selector-overflow-icon-size";
+
+    private CssProperties() {
+    }
+  }
 
   private static class DayOfWeekButton extends Button {
     private static final String CLASS_NAME = "fc-days-of-week-selector-button";
@@ -59,6 +73,7 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
       return dayOfWeek;
     }
 
+    @ClientCallable
     private void toggleState() {
       setState(!state);
     }
@@ -74,29 +89,13 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
 
   }
 
-  private HorizontalLayout buttonsLayout;
+  private List<DayOfWeekButton> dayButtons = new ArrayList<>();
 
   /**
    * Creates a new instance of {@code DayOfWeekSelector}.
    */
   public DayOfWeekSelector() {
-    getStyle().set("padding", "var(--lumo-space-m)");
-    this.setWidthFull();
-
-    buttonsLayout = new HorizontalLayout();
-    buttonsLayout.add(new DayOfWeekButton(DayOfWeek.SUNDAY, "S"));
-    buttonsLayout.add(new DayOfWeekButton(DayOfWeek.MONDAY, "M"));
-    buttonsLayout.add(new DayOfWeekButton(DayOfWeek.TUESDAY, "T"));
-    buttonsLayout.add(new DayOfWeekButton(DayOfWeek.WEDNESDAY, "W"));
-    buttonsLayout.add(new DayOfWeekButton(DayOfWeek.THURSDAY, "T"));
-    buttonsLayout.add(new DayOfWeekButton(DayOfWeek.FRIDAY, "F"));
-    buttonsLayout.add(new DayOfWeekButton(DayOfWeek.SATURDAY, "S"));
-
-    buttonsLayout.setClassName("fc-days-of-week-selector-buttons-layout");
-
-    getButtons().forEach(button -> button.addClickListener(ev -> updateValue()));
-    add(buttonsLayout);
-    clear();
+    initDefaultDayButtons();
   }
 
   /**
@@ -142,32 +141,35 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     return value1 != value2 && Objects.equals(value1, value2);
   }
 
-  private Stream<DayOfWeekButton> getButtons() {
-    return buttonsLayout.getChildren()
-        .filter(DayOfWeekButton.class::isInstance)
-        .map(DayOfWeekButton.class::cast);
-  }
-
   @Override
   protected Set<DayOfWeek> generateModelValue() {
-    return getButtons().filter(DayOfWeekButton::getState).map(DayOfWeekButton::getDayOfWeek)
-        .collect(Collectors.toCollection(this::getEmptyValue));
+    return dayButtons.stream().filter(DayOfWeekButton::getState).map(DayOfWeekButton::getDayOfWeek)
+      .collect(Collectors.toCollection(this::getEmptyValue));
   }
 
   @Override
   protected void setPresentationValue(Set<DayOfWeek> newPresentationValue) {
-    getButtons()
-        .forEach(button -> button.setState(newPresentationValue.contains(button.getDayOfWeek())));
+    dayButtons
+      .forEach(button -> button.setState(newPresentationValue.contains(button.getDayOfWeek())));
   }
 
   @Override
   public void setReadOnly(boolean readOnly) {
     getElement().setProperty("readonly", readOnly);
     getElement().setAttribute("readonly", readOnly);
-    getButtons().forEach(button -> button.setEnabled(!readOnly));
+    dayButtons.forEach(button -> {
+      button.setEnabled(!readOnly);
+      if (readOnly) {
+        button.addClassName("readOnly");
+      } else {
+        button.removeClassName("readOnly");
+      }
+    });
   }
 
-  /** Sets the value of this object. */
+  /**
+   * Sets the value of this object.
+   */
   public void setValue(DayOfWeek first, DayOfWeek... rest) {
     setValue(EnumSet.of(first, rest));
   }
@@ -202,14 +204,14 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     for (DayOfWeek day : DayOfWeek.values()) {
       int index = day.getValue() % 7;
       String text = weekdaysShort.get(index);
-      getButtons().filter(button -> button.getDayOfWeek() == day)
-          .forEach(button -> button.setText(text));
+      dayButtons.stream().filter(button -> button.getDayOfWeek() == day)
+        .forEach(button -> button.setText(text));
     }
   }
 
   /**
    * Sets the tooltips of the week days, starting from {@code sun} and ending on {@code sat}.
-   * 
+   *
    * @param weekdaysTooltip the tooltips of the week days
    */
   public void setWeekDaysTooltip(List<String> weekdaysTooltip) {
@@ -218,8 +220,8 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
     for (DayOfWeek day : DayOfWeek.values()) {
       int index = day.getValue() % 7;
       String text = weekdaysTooltip.get(index);
-      getButtons().filter(button -> button.getDayOfWeek() == day)
-          .forEach(button -> button.setTooltipText(text));
+      dayButtons.stream().filter(button -> button.getDayOfWeek() == day)
+        .forEach(button -> button.setTooltipText(text));
     }
   }
 
@@ -233,14 +235,68 @@ public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
    * @throws IllegalArgumentException if firstDayOfWeek is invalid
    */
   public void setFirstDayOfWeek(DayOfWeek first) {
-    DayOfWeekButton[] buttons = getButtons().toArray(DayOfWeekButton[]::new);
+    DayOfWeekButton[] buttons = dayButtons.toArray(DayOfWeekButton[]::new);
     if (buttons[0].dayOfWeek != first) {
+      var sortedButtons = new ArrayList<DayOfWeekButton>();
       Arrays.sort(buttons, Comparator.comparing(DayOfWeekButton::getDayOfWeek));
-      buttonsLayout.removeAll();
-      for (int i = 0; i < 7; i++) {
-        buttonsLayout.add(buttons[(i + first.getValue() - 1) % 7]);
+      for (int i = 0; i < buttons.length; i++) {
+        sortedButtons.add(buttons[(i + first.getValue() - 1) % buttons.length]);
       }
+      setDayButtons(sortedButtons);
     }
+  }
+
+  /**
+   * Sets the icon for the overflow menu trigger.
+   *
+   * @param icon the icon component, not {@code null}
+   * @throws NullPointerException if {@code icon} is {@code null}
+   */
+  public void setOverflowIcon(Component icon) {
+    Objects.requireNonNull(icon, "icon cannot be null");
+
+    // Remove any existing slotted icon before appending the new one
+    getElement().getChildren()
+      .filter(el -> "overflowIcon".equals(el.getAttribute("slot")))
+      .findFirst()
+      .ifPresent(Element::removeFromParent);
+
+    icon.setClassName("overflow-icon");
+    // Assign icon to the slot
+    icon.getElement().setAttribute("slot", "overflowIcon");
+    getElement().appendChild(icon.getElement());
+  }
+
+  private void initDefaultDayButtons() {
+    setDayButtons(List.of(new DayOfWeekButton(DayOfWeek.SUNDAY, "S"),
+      new DayOfWeekButton(DayOfWeek.MONDAY, "M"),
+      new DayOfWeekButton(DayOfWeek.TUESDAY, "T"),
+      new DayOfWeekButton(DayOfWeek.WEDNESDAY, "W"),
+      new DayOfWeekButton(DayOfWeek.THURSDAY, "T"),
+      new DayOfWeekButton(DayOfWeek.FRIDAY, "F"),
+      new DayOfWeekButton(DayOfWeek.SATURDAY, "S")
+    ));
+  }
+
+  private void setDayButtons(List<DayOfWeekButton> buttons) {
+    this.clearDayButtons();
+    this.dayButtons = buttons;
+    buttons.forEach(button -> button.addClickListener(ev -> updateValue()));
+    this.addDayButtons();
+  }
+
+  private void addDayButtons() {
+    this.dayButtons.forEach(button -> {
+      button.getElement().setAttribute("slot", "daysOfWeek");
+      this.getElement().appendChild(button.getElement());
+    });
+  }
+
+  private void clearDayButtons() {
+    this.dayButtons.forEach(button -> {
+      button.getElement().removeAttribute("slot");
+      button.removeFromParent();
+    });
   }
 
 }
