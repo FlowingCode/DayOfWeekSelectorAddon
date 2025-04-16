@@ -35,13 +35,17 @@ vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled]::part(
     opacity: 1;
 }
 
-vaadin-custom-field[readonly] vaadin-button.fc-days-of-week-selector-button[disabled] {
+vaadin-button.fc-days-of-week-selector-button[disabled].readOnly{
     color: var(--lumo-secondary-text-color);
     background: transparent;
 }
 
-vaadin-custom-field[readonly] vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled] {
+vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled].readOnly {
     border: var(--vaadin-input-field-readonly-border, 1px dashed var(--lumo-contrast-30pct));
+}
+
+vaadin-button.fc-days-of-week-selector-button[focus-ring]{
+    box-shadow: none;
 }
 
 vaadin-horizontal-layout.fc-days-of-week-selector-buttons-layout {
@@ -49,4 +53,8 @@ vaadin-horizontal-layout.fc-days-of-week-selector-buttons-layout {
     justify-content: center;
     flex-wrap: wrap;
     padding: 0 10px;
+}
+
+vaadin-context-menu-overlay vaadin-context-menu-list-box::part(items) {
+    padding: 0 var(--lumo-space-xs);
 }

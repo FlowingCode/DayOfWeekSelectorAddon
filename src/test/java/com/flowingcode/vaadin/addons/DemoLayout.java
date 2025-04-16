@@ -19,10 +19,12 @@
  */
 package com.flowingcode.vaadin.addons;
 
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.RouterLayout;
 
 @SuppressWarnings("serial")
+@CssImport("/styles/shared-styles.css")
 public class DemoLayout extends Div implements RouterLayout {
 
   public DemoLayout() {
