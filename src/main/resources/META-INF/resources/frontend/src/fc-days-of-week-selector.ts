@@ -64,6 +64,7 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
                 flex-wrap: nowrap;
                 overflow: hidden;
                 align-items: center;
+                gap: var(--fc-days-of-week-selector-button-space, var(--lumo-space-m));
             }
 
             [part="overflow-badge"] {
@@ -94,10 +95,14 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
                 box-sizing: border-box;
             }
 
+            [part="container"] vaadin-context-menu {
+                margin-left: calc(var(--lumo-space-s) * -1);
+            }
+
             ::slotted([slot="overflowIcon"]) {
                 --lumo-icon-size-m: var(--fc-days-of-week-selector-overflow-icon-size, 1em);             
             }
-
+            
             /* Style the fallback <vaadin-icon> inside the slot */
             vaadin-icon.overflow-icon {
                 --lumo-icon-size-m: var(--fc-days-of-week-selector-overflow-icon-size, 0.75em);
@@ -157,15 +162,17 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
     }
 
     private _updateOnOverflow() {
-        const containerWidth = this.getBoundingClientRect().width;
+        const containerWidth = this._container.getBoundingClientRect().width;
+        const containerGap = parseFloat(getComputedStyle(this._container).gap) || 0;
+
         let usedWidth = 0;
         const overflowButtons: Node[] = [];
         const overflowButtonWidth = this._getOverflowButtonWidth();
 
         for (const button of this._daysOfWeek) {
             button.style.display = '';
-            const width = button.getBoundingClientRect().width;
-
+            // Add gap only for buttons after the first.
+            const width = button.getBoundingClientRect().width + (usedWidth > 0 ? containerGap : 0);
             if (usedWidth + width > containerWidth - overflowButtonWidth) {
                 const clonedButton = this._cloneButton(button);
                 overflowButtons.push(clonedButton);
