@@ -2,7 +2,7 @@
  * #%L
  * Day of Week Selector Add-on
  * %%
- * Copyright (C) 2023 - 2024 Flowing Code
+ * Copyright (C) 2023 - 2026 Flowing Code
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,8 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("serial")
 @CssImport("./styles/fc-days-of-week-selector-styles.css")
+@CssImport(value = "./styles/vaadin-context-menu-list-box.css",
+    themeFor = "vaadin-context-menu-list-box")
 @JsModule("./src/fc-days-of-week-selector.ts")
 @Tag("fc-days-of-week-selector")
 public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
