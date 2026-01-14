@@ -2,7 +2,7 @@
  * #%L
  * Day of Week Selector Add-on
  * %%
- * Copyright (C) 2023 - 2024 Flowing Code
+ * Copyright (C) 2023 - 2026 Flowing Code
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,10 +53,4 @@ vaadin-horizontal-layout.fc-days-of-week-selector-buttons-layout {
     justify-content: center;
     flex-wrap: wrap;
     padding: 0 10px;
-}
-
-vaadin-context-menu-overlay vaadin-context-menu-list-box::part(items) {
-    padding: 0 var(--lumo-space-xs);
-    display: inline-flex;
-    gap: var(--fc-days-of-week-selector-button-space, var(--lumo-space-m));
 }

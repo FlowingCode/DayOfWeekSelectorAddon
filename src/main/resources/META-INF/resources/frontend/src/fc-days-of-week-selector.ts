@@ -2,7 +2,7 @@
  * #%L
  * Day of Week Selector Add-on
  * %%
- * Copyright (C) 2025 Flowing Code
+ * Copyright (C) 2023 - 2026 Flowing Code
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -219,7 +219,7 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
             </div>
             <div part="container" class="container" id="container">
                 <slot name="daysOfWeek"></slot>
-                <vaadin-context-menu open-on="click" .items=${this._overflowItems}>
+                <vaadin-context-menu open-on="click" theme="fc-day-of-week-selector-context-menu" .items=${this._overflowItems}>
                     <vaadin-button part="overflow-badge" theme="${this.theme} tertiary-inline"
                                    class="overflow-badge" hidden style="cursor: pointer">
                         <slot name="overflowIcon">
