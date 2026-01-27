@@ -1,0 +1,52 @@
+/*-
+ * #%L
+ * Day of Week Selector Add-on
+ * %%
+ * Copyright (C) 2023 - 2026 Flowing Code
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+ 
+/* FOR VAADIN 25 */
+/* for hidden buttons in the overflow */
+ 
+vaadin-button.fc-days-of-week-selector-button {
+	--lumo-button-size: 40px;
+    border-radius: 50%;
+    width: var(--lumo-button-size);
+    max-width: var(--lumo-button-size);
+    min-width: var(--lumo-button-size);
+    height: var(--lumo-button-size);
+    max-height: var(--lumo-button-size);
+    min-height: var(--lumo-button-size);
+    padding-left: calc(var(--lumo-button-size) / 4);
+    padding-right: calc(var(--lumo-button-size) / 4);
+}
+
+vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled]::part(label) {
+    opacity: 1;
+}
+
+vaadin-button.fc-days-of-week-selector-button[disabled].readOnly{
+    color: var(--lumo-secondary-text-color);
+    background: transparent;
+}
+
+vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled].readOnly {
+    border: var(--vaadin-input-field-readonly-border, 1px dashed var(--lumo-contrast-30pct));
+}
+
+vaadin-button.fc-days-of-week-selector-button[focus-ring]{
+    box-shadow: none;
+}

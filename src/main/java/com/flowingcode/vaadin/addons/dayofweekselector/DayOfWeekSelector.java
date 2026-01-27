@@ -47,6 +47,8 @@ import java.util.stream.Collectors;
 @CssImport("./styles/fc-days-of-week-selector-styles.css")
 @CssImport(value = "./styles/vaadin-context-menu-list-box.css",
     themeFor = "vaadin-context-menu-list-box")
+@CssImport(value = "./styles/fc-days-of-week-selector.css",
+    themeFor = "fc-days-of-week-selector")
 @JsModule("./src/fc-days-of-week-selector.ts")
 @Tag("fc-days-of-week-selector")
 public class DayOfWeekSelector extends CustomField<Set<DayOfWeek>> {
