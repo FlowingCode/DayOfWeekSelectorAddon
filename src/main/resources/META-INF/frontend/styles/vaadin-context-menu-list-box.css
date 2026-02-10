@@ -19,7 +19,7 @@
  */
  
 :host([theme~='fc-day-of-week-selector-context-menu']) [part~="items"]	{
-	padding: 0 var(--lumo-space-xs);
+	padding: 0 var(--lumo-space-xs, var(--vaadin-padding-xs));
 	display: inline-flex;
-	gap: var(--fc-days-of-week-selector-button-space, var(--lumo-space-m));
+	gap: var(--fc-days-of-week-selector-button-space, var(--lumo-space-m, var(--vaadin-padding-m)));
 }

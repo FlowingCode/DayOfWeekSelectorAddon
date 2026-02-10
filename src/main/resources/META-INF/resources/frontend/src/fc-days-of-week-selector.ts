@@ -64,7 +64,7 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
                 flex-wrap: nowrap;
                 overflow: hidden;
                 align-items: center;
-                gap: var(--fc-days-of-week-selector-button-space, var(--lumo-space-m));
+                gap: var(--fc-days-of-week-selector-button-space, var(--lumo-space-m, var(--vaadin-gap-m, 0.5rem)));
             }
 
             [part="overflow-badge"] {
@@ -96,7 +96,7 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
             }
 
             [part="container"] vaadin-context-menu {
-                margin-left: calc(var(--lumo-space-s) * -1);
+                margin-left: calc(var(--lumo-space-s, var(--vaadin-gap-s, 8px)) * -1);
             }
 
             ::slotted([slot="overflowIcon"]) {
