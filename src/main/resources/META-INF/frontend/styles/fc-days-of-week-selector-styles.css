@@ -36,12 +36,12 @@ vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled]::part(
 }
 
 vaadin-button.fc-days-of-week-selector-button[disabled].readOnly{
-    color: var(--lumo-secondary-text-color);
+    color: var(--lumo-secondary-text-color, var(--vaadin-text-color-secondary));
     background: transparent;
 }
 
 vaadin-button.fc-days-of-week-selector-button[theme~='primary'][disabled].readOnly {
-    border: var(--vaadin-input-field-readonly-border, 1px dashed var(--lumo-contrast-30pct));
+    border: var(--vaadin-input-field-readonly-border, 1px dashed var(--lumo-contrast-30pct, var(--vaadin-border-color)));
 }
 
 vaadin-button.fc-days-of-week-selector-button[focus-ring]{
