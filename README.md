@@ -14,6 +14,10 @@ Display the days of the week so that they can be selected.
 * Support read-only and disabled states.
 * Support I18N
 
+## Supported versions
+
+Supported versions: Vaadin 24-25 (add-on version 1.x)
+
 ## Online demo
 
 [Online demo here](http://addonsv24.flowingcode.com/day-of-week-selector)
