@@ -198,14 +198,15 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
         clonedButton._originalButton = originalButton;
         clonedButton.removeAttribute("slot");
         clonedButton.style.display = '';
-        clonedButton.addEventListener('click', ev => {
+        clonedButton.addEventListener('click', () => {
             // Update server side button component state
             clonedButton._originalButton.$server.toggleState();
-            if (clonedButton.getAttribute("theme")) {
-                clonedButton.removeAttribute("theme")
-            } else {
-                clonedButton.setAttribute("theme", "primary");
-            }
+            // Toggle only the "primary" token, preserving any other theme tokens
+            const themes = new Set((clonedButton.getAttribute('theme') || '').split(/\s+/).filter(Boolean));
+            themes.has('primary') ? themes.delete('primary') : themes.add('primary');
+            themes.size
+                ? clonedButton.setAttribute('theme', [...themes].join(' '))
+                : clonedButton.removeAttribute('theme');
             // Notify value change to DayOfWeekSelector component
             this.dispatchEvent(new CustomEvent('change', {bubbles: true}));
         });
