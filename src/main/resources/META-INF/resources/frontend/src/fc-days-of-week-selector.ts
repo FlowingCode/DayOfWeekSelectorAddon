@@ -19,10 +19,10 @@
  */
 import {ResizeMixin} from '@vaadin/component-base/src/resize-mixin.js';
 import '@vaadin/context-menu';
-import type {ContextMenuItem} from '@vaadin/context-menu';
+import type {ContextMenu, ContextMenuItem} from '@vaadin/context-menu';
 import {ThemableMixin} from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 import {css, html, LitElement} from 'lit';
-import {customElement, property, query, queryAssignedNodes, state} from 'lit/decorators.js';
+import {customElement, property, query, queryAssignedNodes} from 'lit/decorators.js';
 import {Button} from "@vaadin/button";
 
 @customElement('fc-days-of-week-selector')
@@ -43,8 +43,12 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
     @property()
     label: string = '';
 
-    @state()
-    private _overflowItems: ContextMenuItem[] = [];
+    /**
+     * Overflow context menu. It is kept in the light DOM (slotted into the shadow root)
+     * so that the cloned buttons it renders share the same scope as the original ones
+     * and get the same global theme styles (e.g. Aura).
+     */
+    private _overflowMenu?: ContextMenu;
 
     static styles = [
         css`
@@ -69,6 +73,7 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
 
             [part="overflow-badge"] {
                 line-height: 0.5em;
+                margin-left: calc(var(--lumo-space-s, var(--vaadin-gap-s, 8px)) * -1);
             }
 
             :host(:not([has-label])) [part='label'] {
@@ -93,10 +98,6 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
                 position: relative;
                 max-width: 100%;
                 box-sizing: border-box;
-            }
-
-            [part="container"] vaadin-context-menu {
-                margin-left: calc(var(--lumo-space-s, var(--vaadin-gap-s, 8px)) * -1);
             }
 
             ::slotted([slot="overflowIcon"]) {
@@ -185,12 +186,15 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
         }
 
         // Update context menu items from hidden buttons
-        this._overflowItems = overflowButtons.map(button => ({
-            component: button,
+        const overflowItems: ContextMenuItem[] = overflowButtons.map(button => ({
+            component: button as HTMLElement,
         }));
+        if (this._overflowMenu) {
+            this._overflowMenu.items = overflowItems;
+        }
 
         // Update badges visibility
-        this._overflowBadge.toggleAttribute('hidden', this._overflowItems.length < 1);
+        this._overflowBadge.toggleAttribute('hidden', overflowItems.length < 1);
     }
 
     private _cloneButton(originalButton: Button) {
@@ -220,17 +224,26 @@ export class DaysOfWeekSelector extends ResizeMixin(ThemableMixin(LitElement)) {
             </div>
             <div part="container" class="container" id="container">
                 <slot name="daysOfWeek"></slot>
-                <vaadin-context-menu open-on="click" theme="fc-day-of-week-selector-context-menu" .items=${this._overflowItems}>
-                    <vaadin-button part="overflow-badge" theme="${this.theme} tertiary-inline"
-                                   class="overflow-badge" hidden style="cursor: pointer">
-                        <slot name="overflowIcon">
-                            <!-- Fallback if no icon is provided -->
-                            <vaadin-icon icon="vaadin:ellipsis-dots-v" class="overflow-icon"></vaadin-icon>
-                        </slot>
-                    </vaadin-button>
-                </vaadin-context-menu>
+                <vaadin-button part="overflow-badge" theme="${this.theme} tertiary-inline"
+                               class="overflow-badge" hidden style="cursor: pointer">
+                    <slot name="overflowIcon">
+                        <!-- Fallback if no icon is provided -->
+                        <vaadin-icon icon="vaadin:ellipsis-dots-v" class="overflow-icon"></vaadin-icon>
+                    </slot>
+                </vaadin-button>
             </div>
+            <slot name="overflowMenu"></slot>
         `;
+    }
+
+    firstUpdated() {
+        const menu = document.createElement('vaadin-context-menu') as ContextMenu;
+        menu.slot = 'overflowMenu';
+        menu.setAttribute('theme', 'fc-day-of-week-selector-context-menu');
+        menu.openOn = 'click';
+        menu.listenOn = this._overflowBadge;
+        this.appendChild(menu);
+        this._overflowMenu = menu;
     }
 
     update(_changedProperties: Map<PropertyKey, unknown>) {
