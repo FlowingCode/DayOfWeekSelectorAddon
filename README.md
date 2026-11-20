@@ -1,5 +1,5 @@
 [![Published on Vaadin Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/day-of-week-selector-add-on)
-[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/day-of-week-selector-addon.svg)](https://vaadin.com/directory/component/day-of-week-selector-add-on)
+[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/day-of-week-selector-add-on.svg)](https://vaadin.com/directory/component/day-of-week-selector-add-on)
 [![Build Status](https://jenkins.flowingcode.com/job/DayOfWeekSelector-addon/badge/icon)](https://jenkins.flowingcode.com/job/DayOfWeekSelector-addon)
 [![Maven Central](https://img.shields.io/maven-central/v/com.flowingcode.vaadin.addons/day-of-week-selector-addon)](https://mvnrepository.com/artifact/com.flowingcode.vaadin.addons/day-of-week-selector-addon)
 [![Javadoc](https://img.shields.io/badge/javadoc-00b4f0)](https://javadoc.flowingcode.com/artifact/com.flowingcode.vaadin.addons/day-of-week-selector-addon)
